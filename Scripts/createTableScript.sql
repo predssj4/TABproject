@@ -1,14 +1,12 @@
-
-
 create table Payments
 (
-	PaymentId int primary key,
+	PaymentId int identity(1,1) primary key,
 	Description varchar(1000)
 );
 
 create table Orders
 (
-	OrderId int primary key,
+	OrderId int identity(1,1) primary key,
 	CustomerId int not null,
 	StoreId int not null,
 	PaymentId int foreign key references Payments(PaymentId),
@@ -17,13 +15,13 @@ create table Orders
 
 create table CustomerProfileDescriptions
 (
-	CustomerProfileDescId int primary key,
+	CustomerProfileDescId int identity(1,1) primary key,
 	Description varchar(250) not null
 );
 
 create table Customers
 (
-	CustomerId int primary key,
+	CustomerId int identity(1,1) primary key,
 	Name varchar(50) not null,
 	LastName varchar(50) not null,
 	BirthDate date not null,
@@ -35,7 +33,7 @@ create table Customers
 
 Create table Stores
 (
-	StoreId int primary key,
+	StoreId int identity(1,1) primary key,
 	Name varchar(100) not null,
 	Street varchar(50) not null,
 	City varchar(50) not null,
@@ -44,7 +42,7 @@ Create table Stores
 
 Create table StoreHouses
 (
-	StoreHouseId int primary key,
+	StoreHouseId int identity(1,1) primary key,
 	Street varchar(50) not null,
 	City varchar(50) not null,
 	Voivodeship varchar(50) not null,
@@ -52,21 +50,21 @@ Create table StoreHouses
 
 Create table StoresToStoreHouses
 (
-	StoreId int foreign key references Stores(StoreId),
-	StoreHouseId int foreign key references StoreHouses(StoreHouseId),
+	StoreId int identity(1,1) foreign key references Stores(StoreId),
+	StoreHouseId int identity(1,1) foreign key references StoreHouses(StoreHouseId),
 
 	primary key(StoreId, StoreHouseId)
 );
 
 Create table ProductTypes
 (
-	TypeId int primary key,
+	TypeId int identity(1,1) primary key,
 	Name varchar(30) not null
 )
 
 Create table Products
 (
-	ProductId int primary key,
+	ProductId int identity(1,1) primary key,
 	Name varchar(100) not null,
 	Description varchar(500) not null,
 	ProductTypeId int foreign key references ProductTypes(TypeId),
@@ -91,7 +89,7 @@ Create table StoreHousesToProduct
 
 Create table Discounts
 (
-	DiscountId int primary key,
+	DiscountId int identity(1,1) primary key,
 	Name varchar(100) not null,
 	DateFrom date not null,
 	DateTo date not null,
@@ -100,9 +98,8 @@ Create table Discounts
 );
 
 
-
-drop table Payments;
 drop table Orders;
+drop table Payments;
 drop table Discounts;
 drop table StoreHousesToProduct;
 drop table OrderDetails;
