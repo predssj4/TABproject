@@ -1,5 +1,3 @@
-drop table Payments;
-drop table Orders;
 
 
 create table Payments
@@ -11,10 +9,16 @@ create table Payments
 create table Orders
 (
 	OrderId int primary key,
-	CustomerId int,
-	StoreId int,
-	PaymentId int,
-	OrderDate date	
+	CustomerId int not null,
+	StoreId int not null,
+	PaymentId int foreign key references Payments(PaymentId),
+	OrderDate date not null	
+);
+
+create table CustomerProfileDescriptions
+(
+	CustomerProfileDescId int primary key,
+	Description varchar(250) not null
 );
 
 create table Customers
@@ -25,14 +29,9 @@ create table Customers
 	BirthDate date not null,
 	Address varchar(100) not null,
 	Gender varchar(2) not null,
-	CustomerProfileDescriptionId int not null
+	CustomerProfileDescriptionId int foreign key references CustomerProfileDescriptions(CustomerProfileDescId) on delete cascade
 );
 
-create table CustomerProfileDescriptions
-(
-	CustomerProfileDescId int primary key,
-	Description varchar(250) not null
-);
 
 Create table Stores
 (
@@ -43,14 +42,6 @@ Create table Stores
 	Voivodeship varchar(50) not null,
 );
 
-Create table StoresToStoreHouses
-(
-	StoreId int,
-	StoreHouseId int
-
-	primary key(StoreId, StoreHouseId)
-);
-
 Create table StoreHouses
 (
 	StoreHouseId int primary key,
@@ -59,12 +50,18 @@ Create table StoreHouses
 	Voivodeship varchar(50) not null,
 );
 
-Create table StoreHousesToProduct
+Create table StoresToStoreHouses
 (
-	StoreHouseId int,
-	ProductId int,
+	StoreId int foreign key references Stores(StoreId),
+	StoreHouseId int foreign key references StoreHouses(StoreHouseId),
 
-	primary key(StoreHouseId, ProductId)
+	primary key(StoreId, StoreHouseId)
+);
+
+Create table ProductTypes
+(
+	TypeId int primary key,
+	Name varchar(30) not null
 )
 
 Create table Products
@@ -72,14 +69,47 @@ Create table Products
 	ProductId int primary key,
 	Name varchar(100) not null,
 	Description varchar(500) not null,
-	ProductTypeId int not null,
+	ProductTypeId int foreign key references ProductTypes(TypeId),
 	Price decimal not null,
 );
 
-Create table ProductTypes
+create table OrderDetails
 (
-	TypeId int primary key,
-	Name varchar(30)
+	OrderId int foreign key references Orders(OrderId),
+	ProductId int foreign key references Products(ProductId),
+
+	primary key(OrderId, ProductId)
+);
+
+Create table StoreHousesToProduct
+(
+	StoreHouseId int foreign key references StoreHouses(StoreHouseId),
+	ProductId  int foreign key references Products(ProductId),
+
+	primary key(StoreHouseId, ProductId)
 )
 
+Create table Discounts
+(
+	DiscountId int primary key,
+	Name varchar(100) not null,
+	DateFrom date not null,
+	DateTo date not null,
+	StoreId int foreign key references Stores(StoreId),
+	Value decimal not null
+);
 
+
+
+drop table Payments;
+drop table Orders;
+drop table Discounts;
+drop table StoreHousesToProduct;
+drop table OrderDetails;
+drop table Products;
+drop table ProductTypes;
+drop table StoresToStoreHouses;
+drop table StoreHouses;
+drop table Stores;
+drop table Customers;
+drop table CustomerProfileDescriptions;
