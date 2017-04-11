@@ -50,8 +50,8 @@ Create table StoreHouses
 
 Create table StoresToStoreHouses
 (
-	StoreId int identity(1,1) foreign key references Stores(StoreId),
-	StoreHouseId int identity(1,1) foreign key references StoreHouses(StoreHouseId),
+	StoreId int foreign key references Stores(StoreId),
+	StoreHouseId int foreign key references StoreHouses(StoreHouseId),
 
 	primary key(StoreId, StoreHouseId)
 );
@@ -98,15 +98,15 @@ Create table Discounts
 );
 
 
-drop table Orders;
-drop table Payments;
-drop table Discounts;
-drop table StoreHousesToProduct;
-drop table OrderDetails;
-drop table Products;
-drop table ProductTypes;
-drop table StoresToStoreHouses;
-drop table StoreHouses;
-drop table Stores;
-drop table Customers;
-drop table CustomerProfileDescriptions;
+--drop table Orders;
+--drop table Payments;
+--drop table Discounts;
+--drop table StoreHousesToProduct;
+--drop table OrderDetails;
+--drop table Products;
+--drop table ProductTypes;
+--drop table StoresToStoreHouses;
+--drop table StoreHouses;
+--drop table Stores;
+--drop table Customers;
+--drop table CustomerProfileDescriptions;
