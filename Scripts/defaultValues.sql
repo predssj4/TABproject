@@ -18,11 +18,13 @@ values
 
 GO
 
-insert into dbo.Payments (Description)
+insert into [dbo].[Payments] (Description)
 values 
 ('Gotówka'),
 ('Przelew'),
 ('PayPal');
+
+
 
 GO
 
@@ -131,3 +133,13 @@ values
 
 Go
 
+
+
+--insert into [dbo].[Payments] (PaymentId, Description)
+--values 
+--(next value for [dbo].[PaymentIdInt] ,'Gotówka'),
+--(next value for [dbo].[PaymentIdInt], 'Przelew'),
+--(next value for [dbo].[PaymentIdInt], 'PayPal');
+--przyklad jak zastosowac wlasne sekwencje podczas wstawiania rekordow
+--nalezy tez usunac identity(1,1) z tabeli przed wstawieniem i dodac Id przed Description
+-- w nawiasnie

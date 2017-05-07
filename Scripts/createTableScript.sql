@@ -1,10 +1,10 @@
-create table Payments
+create table [dbo].Payments
 (
-	PaymentId int identity(1,1) primary key,
+	PaymentId int  identity(1,1) primary key,
 	Description varchar(1000)
 );
 
-create table Orders
+create table [dbo].Orders
 (
 	OrderId int identity(1,1) primary key,
 	CustomerId int not null,
@@ -13,13 +13,13 @@ create table Orders
 	OrderDate date not null	
 );
 
-create table CustomerProfileDescriptions
+create table [dbo].CustomerProfileDescriptions
 (
 	CustomerProfileDescId int identity(1,1) primary key,
 	Description varchar(250) not null
 );
 
-create table Customers
+create table [dbo].Customers
 (
 	CustomerId int identity(1,1) primary key,
 	Name varchar(50) not null,
@@ -31,7 +31,7 @@ create table Customers
 );
 
 
-Create table Stores
+Create table [dbo].Stores
 (
 	StoreId int identity(1,1) primary key,
 	Name varchar(100) not null,
@@ -40,7 +40,7 @@ Create table Stores
 	Voivodeship varchar(50) not null,
 );
 
-Create table StoreHouses
+Create table [dbo].StoreHouses
 (
 	StoreHouseId int identity(1,1) primary key,
 	Street varchar(50) not null,
@@ -48,7 +48,7 @@ Create table StoreHouses
 	Voivodeship varchar(50) not null,
 );
 
-Create table StoresToStoreHouses
+Create table [dbo].StoresToStoreHouses
 (
 	StoreId int foreign key references Stores(StoreId),
 	StoreHouseId int foreign key references StoreHouses(StoreHouseId),
@@ -56,13 +56,13 @@ Create table StoresToStoreHouses
 	primary key(StoreId, StoreHouseId)
 );
 
-Create table ProductTypes
+Create table [dbo].ProductTypes
 (
 	TypeId int identity(1,1) primary key,
 	Name varchar(30) not null
 )
 
-Create table Products
+Create table [dbo].Products
 (
 	ProductId int identity(1,1) primary key,
 	Name varchar(100) not null,
@@ -71,15 +71,14 @@ Create table Products
 	Price decimal not null,
 );
 
-create table OrderDetails
+create table [dbo].OrderDetails
 (
 	OrderId int foreign key references Orders(OrderId),
 	ProductId int foreign key references Products(ProductId),
-
 	primary key(OrderId, ProductId)
 );
 
-Create table StoreHousesToProduct
+Create table [dbo].StoreHousesToProduct
 (
 	StoreHouseId int foreign key references StoreHouses(StoreHouseId),
 	ProductId  int foreign key references Products(ProductId),
@@ -87,26 +86,25 @@ Create table StoreHousesToProduct
 	primary key(StoreHouseId, ProductId)
 )
 
-Create table Discounts
+Create table [dbo].Discounts
 (
 	DiscountId int identity(1,1) primary key,
 	Name varchar(100) not null,
 	DateFrom date not null,
 	DateTo date not null,
-	StoreId int foreign key references Stores(StoreId),
-	Value decimal not null
+	Value decimal(4,2) not null
 );
 
 
---drop table Orders;
---drop table Payments;
---drop table Discounts;
---drop table StoreHousesToProduct;
---drop table OrderDetails;
---drop table Products;
---drop table ProductTypes;
---drop table StoresToStoreHouses;
---drop table StoreHouses;
---drop table Stores;
---drop table Customers;
---drop table CustomerProfileDescriptions;
+--drop table [dbo].Payments;
+--drop table [dbo].Orders;
+--drop table [dbo].Discounts;
+--drop table [dbo].StoreHousesToProduct;
+--drop table [dbo].OrderDetails;
+--drop table [dbo].ProductTypes;
+--drop table [dbo].Products;
+--drop table [dbo].StoresToStoreHouses;
+--drop table [dbo].StoreHouses;
+--drop table [dbo].Stores;
+--drop table [dbo].Customers;
+--drop table [dbo].CustomerProfileDescriptions;

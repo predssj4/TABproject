@@ -6,7 +6,6 @@ CREATE SEQUENCE [dbo].[CustomerProfileIdInt]
     INCREMENT BY 1  
     MINVALUE 1
     MAXVALUE 9999999  
-      
 ; 
 
 CREATE SEQUENCE [dbo].[CustomerIdInt] 
@@ -58,8 +57,7 @@ CREATE SEQUENCE [dbo].[ProductIdInt]
     START WITH 1  
     INCREMENT BY 1  
     MINVALUE 1
-    MAXVALUE 9999999  
-      
+    MAXVALUE 9999999   
 ; 
 
 CREATE SEQUENCE [dbo].[ProductTypesIdInt] 
