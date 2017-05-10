@@ -21,14 +21,17 @@ namespace Store.DataAccess
                 using (SqlCommand command = new SqlCommand())
                 {
 
+
+                   
+
                     command.Connection = conn;
                     command.CommandType = CommandType.Text;
-                    command.CommandText = @"INSERT INTO klant(klant_id,naam,voornaam) 
-                            VALUES(@param1,@param2,@param3)";
+                    command.CommandText = "EXEC dbo.addProduct @Name=@param1, @Description = @param2, @ProductTypeId = @param3, @Price = @param4";
 
-                    //command.Parameters.AddWithValue("@param1", klantId);
-                    //command.Parameters.AddWithValue("@param2", klantNaam);
-                    //command.Parameters.AddWithValue("@param3", klantVoornaam);
+                    command.Parameters.AddWithValue("@param1", product.Name);
+                    command.Parameters.AddWithValue("@param2", product.Description);
+                    command.Parameters.AddWithValue("@param3", product.ProductTypeId);
+                    command.Parameters.AddWithValue("@param4", product.Price);
 
                     try
                     {
@@ -39,7 +42,7 @@ namespace Store.DataAccess
                     {
                         return "Nie udało się dodać produktu";
                     }
-                    
+
                 }
             }
 
