@@ -28,5 +28,16 @@ namespace Store.Tests
 
             Assert.AreEqual("", res);
         }
+
+        [Test]
+        public void ProductsList_ShouldReturnList()
+        {
+            ProductRepository pr = new ProductRepository();
+
+            var result = pr.GetProductsList();
+
+        }
     }
+
+
 }

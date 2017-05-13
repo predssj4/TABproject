@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Store.DataAccess;
+using Store.DataAccess.ViewModels;
 
 namespace Store.WebUI.Controllers
 {
@@ -21,6 +22,40 @@ namespace Store.WebUI.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+
+        [HttpGet]
+        public ActionResult AddProduct()
+        {
+
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult AddProduct(ProductViewModel model)
+        {
+            var result =  _productRepo.AddProduct(model);
+
+            return Content(result);
+
+        }
+
+        [HttpGet]
+        public ActionResult GetProductsList()
+        {
+            var result = _productRepo.GetProductsList();
+
+            return View(result);
+        }
+
+        //[HttpDelete]
+        public ActionResult Delete(int id)
+        {
+            var result = _productRepo.DeleteProduct(id);
+
+            return View("Info", result);
         }
     }
 }
