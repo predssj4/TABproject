@@ -9,13 +9,12 @@ namespace Store.Tests
 {
     
     [TestFixture]
-    public class UnitTest2
+    public class ProductRepositoryTests
     {
         [Test]
         public void ConnectionExecuting()
         {
             ProductRepository pr = new ProductRepository();
-
             var product = new ProductViewModel()
             {
                 Name = "Kujawski",
@@ -25,7 +24,6 @@ namespace Store.Tests
             };
 
            var res =  pr.AddProduct(product);
-
             Assert.AreEqual("", res);
         }
 
@@ -33,9 +31,23 @@ namespace Store.Tests
         public void ProductsList_ShouldReturnList()
         {
             ProductRepository pr = new ProductRepository();
-
             var result = pr.GetProductsList();
 
+        }
+
+        [Test]
+        public void DeleteProduct_ProductShouldBeDeletes()
+        {
+            ProductRepository pr = new ProductRepository();
+            pr.DeleteProduct(13);
+        }
+
+        [Test]
+        public void GetProduct_SomeProductShouldBeReturned()
+        {
+            ProductRepository pr = new ProductRepository();
+            var result = pr.GetProduct(1);
+            Assert.IsNotNull(result);
         }
     }
 

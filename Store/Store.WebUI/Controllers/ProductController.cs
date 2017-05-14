@@ -10,8 +10,6 @@ namespace Store.WebUI.Controllers
 {
     public class ProductController : Controller
     {
-        // GET: Product
-
         private readonly ProductRepository _productRepo;
 
         public ProductController()
@@ -38,7 +36,7 @@ namespace Store.WebUI.Controllers
         {
             var result =  _productRepo.AddProduct(model);
 
-            return Content(result);
+            return View("Info", result);
 
         }
 
@@ -56,6 +54,30 @@ namespace Store.WebUI.Controllers
             var result = _productRepo.DeleteProduct(id);
 
             return View("Info", result);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var product = _productRepo.GetProduct(id);
+
+            return View(product);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(ProductViewModel model)
+        {
+            var result = _productRepo.EditProduct(model);
+
+            return View("Info", (object)result);
+        }
+
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            var result = _productRepo.GetDetails(id);
+
+            return View(result);
         }
     }
 }
