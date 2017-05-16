@@ -38,8 +38,8 @@ namespace Store.Tests
         [Test]
         public void DeleteProduct_ProductShouldBeDeletes()
         {
-            ProductRepository pr = new ProductRepository();
-            pr.DeleteProduct(13);
+           // ProductRepository pr = new ProductRepository();
+           // pr.DeleteProduct(13);
         }
 
         [Test]
