@@ -174,6 +174,12 @@
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Store\GetStoreIncome.cshtml" />
     <Content Include="Views\Store\IncomeDetails.cshtml" />
+    <Content Include="Views\Store\Index.cshtml" />
+    <Content Include="Views\Store\AddStoreHouse.cshtml" />
+    <Content Include="Views\Discount\AddDiscount.cshtml" />
+    <Content Include="Views\Discount\GetDiscounts.cshtml" />
+    <Content Include="Views\Store\AddStore.cshtml" />
+    <Content Include="Views\Discount\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -185,7 +191,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Customer\" />
-    <Folder Include="Views\Discount\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Store.DataAccess\Store.DataAccess.csproj">

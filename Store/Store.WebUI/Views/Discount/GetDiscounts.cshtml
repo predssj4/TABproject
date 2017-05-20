@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Store.DataAccess.ViewModels.DiscountViewModel>
+
+@{
+    ViewBag.Title = "GetDiscounts";
+}
+
+<h2>Discounts</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddDiscount")
+</p>
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DiscountId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Value)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiscountId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateFrom.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTo.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Value)
+        </td>
+    </tr>
+}
+
+</table>

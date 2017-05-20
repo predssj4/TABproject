@@ -41,5 +41,32 @@ namespace Store.Tests
 
             Assert.IsNotNull(result);
         }
+
+        [Test]
+        public void AddStore_StoreShouldBeAdded()
+        {
+            StoreRepository sr = new StoreRepository();
+
+            sr.AddStore(new DataAccess.ViewModels.StoreViewModel
+            {
+                Name = "Nowy test",
+                City = "City test",
+                Street = "Street test",
+                Voivodeship = "Voivodoship test"
+            });
+        }
+
+        [Test]
+        public void BindStoreHouseToStore_should_be_executed_without_exceptions()
+        {
+            StoreRepository sr = new StoreRepository();
+
+            sr.BindStoreHouses(1, new List<int>()
+            {
+               6,
+            });
+
+
+        }
     }
 }

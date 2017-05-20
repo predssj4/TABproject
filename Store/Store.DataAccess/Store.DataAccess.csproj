@@ -41,11 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionString.cs" />
+    <Compile Include="Repositories\DiscountRepository.cs" />
     <Compile Include="Repositories\StoreRepository.cs" />
+    <Compile Include="ViewModels\DiscountViewModel.cs" />
     <Compile Include="ViewModels\ProductDetailsViewModel.cs" />
     <Compile Include="Repositories\ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ProductTypeViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="ViewModels\StoreHouseViewModel.cs" />
     <Compile Include="ViewModels\StoreIncomeDetailsViewModel.cs" />
     <Compile Include="ViewModels\StoreIncomeViewModel.cs" />
     <Compile Include="ViewModels\StoreViewModel.cs" />

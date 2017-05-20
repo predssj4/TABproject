@@ -153,18 +153,19 @@ namespace Store.DataAccess
             {
                 conn.Open();
 
-                using (SqlCommand command = new SqlCommand("SELECT * FROM DBO.Products", conn))
+                using (SqlCommand command = new SqlCommand("EXEC dbo.getProducts", conn))
                 {
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
                         int id = reader.GetInt32(0);
-                        string name = reader.GetString(1);    // Weight int
-                        string description = reader.GetString(2);  // Name string
-                        int productTypeId = reader.GetInt32(3); // Breed string
+                        string name = reader.GetString(1);
+                        string description = reader.GetString(2);
+                        int productTypeId = reader.GetInt32(3);
                         decimal price = reader.GetDecimal(4);
+                        string typeName = reader.GetString(5);
 
-                        products.Add(new ProductViewModel() { Id = id, Name = name, Description = description, ProductTypeId = productTypeId, Price = price });
+                        products.Add(new ProductViewModel() { Id = id, Name = name, Description = description, ProductTypeId = productTypeId, Price = price, ProductTypeName= typeName });
                     }
                 }
             }
@@ -198,11 +199,38 @@ namespace Store.DataAccess
 
                         return new ProductViewModel() { Id = id, Name = name, Description = description, ProductTypeId = productTypeId, Price = price };
                     }
-
-                    
                 }
             }
 
+        }
+
+        public IEnumerable<ProductTypeViewModel> GetProductTypes()
+        {
+
+            List<ProductTypeViewModel> types = new List<ProductTypeViewModel>();
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString._connString))
+            {
+                conn.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = conn;
+                    command.CommandType = CommandType.Text;
+                    command.CommandText = "EXEC dbo.getProductTypes";
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int id = reader.GetInt32(0);
+                        string name = reader.GetString(1);
+                        
+                        types.Add(new ProductTypeViewModel() { TypeId = id, Name = name });
+                    }
+
+                    return types;
+                }
+            }
         }
     }
 }

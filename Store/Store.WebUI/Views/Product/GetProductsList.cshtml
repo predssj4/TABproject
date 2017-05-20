@@ -9,7 +9,8 @@
 <p>
     @Html.ActionLink("Create New", "AddProduct")
 </p>
-<table class="table">
+
+<table class="table table-hover table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -18,7 +19,7 @@
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProductTypeId)
+            @Html.DisplayNameFor(model => model.ProductTypeName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
@@ -35,7 +36,7 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ProductTypeId)
+            @Html.DisplayFor(modelItem => item.ProductTypeName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Price)

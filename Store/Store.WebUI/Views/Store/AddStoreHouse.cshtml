@@ -1,0 +1,27 @@
+﻿@using Store.DataAccess.ViewModels
+
+@{
+    ViewBag.Title = "AddStoreHouse";
+}
+
+<h2>AddStoreHouse</h2>
+
+
+@using (Html.BeginForm("BindStoreHouses", "Store", FormMethod.Post))
+{
+
+    @Html.Hidden("storeId", (object)ViewBag.storeId)
+
+    <select multiple name="storeHouses">
+        @foreach (var storehouse in ViewBag.storeHouses as IEnumerable<StoreHouseViewModel>)
+        {
+            <option value=@storehouse.StoreHouseId>@(storehouse.Street +" w mieście " + storehouse.City )</option>
+        }
+    </select>
+
+
+    <hr />
+
+    <button type="submit" class="btn btn-danger">Send</button>
+
+}

@@ -33,9 +33,10 @@
             @Html.DisplayFor(modelItem => item.Income)
         </td>
         <td>
-
             @Html.ActionLink("Details", "IncomeDetails", new {  id=item.StoreId })
-
+        </td>
+        <td>
+            @Html.ActionLink("Add Store Houses", "AddStoreHouse", new { id = item.StoreId })
         </td>
     </tr>
 }

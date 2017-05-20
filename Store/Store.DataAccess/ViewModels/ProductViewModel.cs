@@ -13,5 +13,6 @@ namespace Store.DataAccess.ViewModels
         public string Description { get; set; }
         public int ProductTypeId { get; set; }
         public decimal Price { get; set; }
-    }
+        public string ProductTypeName { get; set; }
+}
 }

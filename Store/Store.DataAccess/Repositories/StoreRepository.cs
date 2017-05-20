@@ -82,8 +82,6 @@ namespace Store.DataAccess.Repositories
             List<StoreViewModel> stores = new List<StoreViewModel>();
             using (SqlConnection conn = new SqlConnection(ConnectionString._connString))
             {
-
-
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = conn;
@@ -112,5 +110,110 @@ namespace Store.DataAccess.Repositories
         }
 
 
+        public string AddStore(StoreViewModel model)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnectionString._connString))
+            {
+                conn.Open();
+                using (SqlTransaction trans = conn.BeginTransaction())
+                {
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = conn;
+                        command.CommandType = CommandType.Text;
+                        command.CommandText =
+                            "EXEC dbo.addStore @Name=@param1, @Street = @param2, @City = @param3, @Voivodeship = @param4";
+                        command.Transaction = trans;
+
+                        command.Parameters.AddWithValue("@param1", model.Name);
+                        command.Parameters.AddWithValue("@param2", model.Street);
+                        command.Parameters.AddWithValue("@param3", model.City);
+                        command.Parameters.AddWithValue("@param4", model.Voivodeship);
+
+                        try
+                        {
+                            command.ExecuteNonQuery();
+                            trans.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            trans.Rollback();
+                            return "Nie udało się dodać sklepu: " + ex.Message.ToString();
+                        }
+                    }
+                }
+            }
+
+            return "Sklep został pomyślnie dodany do sieci";
+        }
+
+        public IEnumerable<StoreHouseViewModel> GetAllStoreHouses()
+        {
+            List<StoreHouseViewModel> storeHouses = new List<StoreHouseViewModel>();
+            using (SqlConnection conn = new SqlConnection(ConnectionString._connString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = conn;
+                    command.CommandType = CommandType.Text;
+                    command.CommandText = "SELECT storehouseid, street, City, Voivodeship from dbo.StoreHouses";
+
+                    conn.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        storeHouses.Add(new StoreHouseViewModel()
+                        {
+                            StoreHouseId = reader.GetInt32(0),
+                            Street = reader.GetString(1),
+                            City = reader.GetString(2),
+                            Voivodeship = reader.GetString(3),
+
+                        });
+                    }
+                }
+            }
+
+            return storeHouses;
+        }
+
+        public string BindStoreHouses(int storeId, List<int> storeHouses)
+        {
+            int storeHouseId = storeHouses[0];
+            using (SqlConnection conn = new SqlConnection(ConnectionString._connString))
+            {
+                conn.Open();
+                using (SqlTransaction trans = conn.BeginTransaction())
+                {
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = conn;
+                        command.Transaction = trans;
+                        command.CommandType = CommandType.Text;
+                        command.CommandText ="INSERT INTO dbo.StoresToStoreHouses (StoreId, StoreHouseId) values(@param1, @param2)";
+
+
+                        command.Parameters.AddWithValue("@param1", storeId);
+                        command.Parameters.AddWithValue("@param2", storeHouseId);
+
+
+                        try
+                        {
+                            command.ExecuteNonQuery();
+                            trans.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            trans.Rollback();
+                            return "Nie udało się połączyć magazynu" + ex.Message.ToString();
+                        }
+                    }
+                }
+            }
+
+            return "Magazyn pomyślnie powiązany ze sklepem";
+        }
     }
+
 }

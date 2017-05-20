@@ -26,6 +26,7 @@ namespace Store.WebUI.Controllers
         [HttpGet]
         public ActionResult AddProduct()
         {
+            ViewBag.Types = _productRepo.GetProductTypes();
 
             return View();
         }
