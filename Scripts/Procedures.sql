@@ -245,3 +245,72 @@ BEGIN
 END;
 
 GO
+
+--DROP procedure dbo.GetCustomersList
+CREATE PROCEDURE dbo.getCustomersList
+AS
+BEGIN
+	SELECT 
+		cus.CustomerId,
+		cus.Name,
+		cus.LastName,
+		cus.BirthDate,
+		cus.Address,
+		cus.Gender
+	FROM dbo.customers cus
+END;
+
+GO 
+--drop procedure dbo.getCustomerDetails
+CREATE PROCEDURE dbo.getCustomerDetails
+	@CustomerId int
+AS
+BEGIN
+
+	DECLARE @sumOfOrders decimal =  (SELECT SUM(pro.Price)
+									FROM dbo.orders ord
+										LEFT OUTER JOIN dbo.OrderDetails od On ord.OrderId = od.OrderId
+										LEFT OUTER JOIN dbo.Products pro ON od.ProductId = pro.ProductId
+									WHERE ord.CustomerId = @CustomerId)
+
+	SELECT
+		(cus.Name + ' ' + cus.LastName) as FullName,
+		cpd.Description as Description,
+		  @sumOfOrders as sumOfOrders
+		
+	FROM dbo.Customers cus
+		left outer join [dbo].[CustomerProfileDescriptions] cpd ON cus.[CustomerProfileDescriptionId] = cpd.[CustomerProfileDescId]
+	where cus.CustomerId = @customerId
+
+END;
+
+
+
+
+GO
+
+--drop procedure dbo.GetCustomerOrders
+CREATE PROCEDURE dbo.getCustomerOrders
+	@CustomerId int
+AS
+BEGIN
+
+	SELECT 
+		ord.OrderId
+		,@CustomerId as CustomerId
+		,store.Name as StoreName
+		,pay.Description as PaymentType
+		,ord.OrderDate
+		,(
+			select	Sum(pro.Price)
+					from  dbo.OrderDetails ord1
+					LEFT OUTER JOIN dbo.Products pro ON ord1.ProductId = pro.ProductId
+					where ord1.OrderId = ord.OrderId
+
+		) as OrderSum
+		FROM dbo.Orders ord
+			LEFT OUTER JOIN dbo.Stores store ON ord.StoreId = store.StoreId
+			LEFT OUTER JOIN dbo.Payments pay ON ord.PaymentId = pay.PaymentId
+
+		WHERE ord.CustomerId = @CustomerId
+END;
