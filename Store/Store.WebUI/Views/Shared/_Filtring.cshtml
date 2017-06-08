@@ -1,0 +1,15 @@
+﻿@using Store.DataAccess
+@model Store.DataAccess.FilterViewModels.StoreFilterVM
+
+
+
+@using (Html.BeginForm("GetStoreIncome", "Store", FormMethod.Get, new { @class = "" }))
+{
+    <div class="col-lg-12">
+        
+      
+    @Html.DropDownListFor(x => x.Filter, EnumHelper.GetSelectList(typeof(Filters.StoreFilter)))
+        
+        <button type="submit">wyslij</button>
+    </div>
+}

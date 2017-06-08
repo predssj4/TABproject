@@ -37,14 +37,38 @@ namespace Store.WebUI.Controllers
         {
             var result =  _productRepo.AddProduct(model);
 
-            return View("Info", result);
+            return View("Info", (object)result);
 
         }
 
         [HttpGet]
-        public ActionResult GetProductsList()
+        public ActionResult GetProductsList(string filter = "IdAsc")
         {
             var result = _productRepo.GetProductsList();
+
+            switch (filter)
+            {
+                case "IdAsc":
+                    result = result.OrderBy(x => x.Id).ToList();
+                    break;
+                case "IdDesc":
+                    result = result.OrderByDescending(x => x.Id).ToList();
+                    break;
+                case "NameAsc":
+                    result = result.OrderBy(x => x.Name).ToList();
+                    break;
+                case "NameDesc":
+                    result = result.OrderByDescending(x => x.Name).ToList();
+                    break;
+                case "PriceAsc":
+                    result = result.OrderBy(x => x.Price).ToList();
+                    break;
+                case "PriceDesc":
+                    result = result.OrderByDescending(x => x.Price).ToList();
+                    break;
+
+            }
+
 
             return View(result);
         }

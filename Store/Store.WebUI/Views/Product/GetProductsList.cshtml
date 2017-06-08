@@ -6,6 +6,25 @@
 
 <h2>Products List</h2>
 
+
+
+<form action="GetProductsList" method="get">
+    <div class="col-xs-3">
+        <select name="filter" class="form-control">
+            <option value="IdAsc">Id ascending</option>
+            <option value="IdDesc">Id descending</option>
+            <option value="NameAsc">Name Ascending</option>
+            <option value="NameDesc">Name Descending</option>
+            <option value="PriceAsc">Price Ascending</option>
+            <option value="PriceDesc">Price Descending</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-danger">Send</button>
+</form>
+
+<br />
+
 <p>
     @Html.ActionLink("Create New", "AddProduct")
 </p>

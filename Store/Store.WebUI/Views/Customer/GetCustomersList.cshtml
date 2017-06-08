@@ -2,6 +2,28 @@
 
 <h3>List of Customers</h3>
 
+
+<form action="GetCustomersList" method="get">
+    <div class="col-xs-3">
+        <select name="filter" class="form-control">
+            <option value="IdAsc">Id ascending</option>
+            <option value="IdDesc">Id descending</option>
+            <option value="NameAsc">Name Ascending</option>
+            <option value="NameDesc">Name Descending</option>
+            <option value="LastNameAsc">LastName Ascending</option>
+            <option value="LastNameDesc">LastName Descending</option>
+            <option value="AddressAsc">Address Ascending</option>
+            <option value="AddressDesc">Address Descending</option>
+            <option value="BirthAsc">Birth Ascending</option>
+            <option value="BirthDesc">Birth Descending</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-danger">Send</button>
+</form>
+
+<br />
+
 <table class="table">
     <tr>
         <th>

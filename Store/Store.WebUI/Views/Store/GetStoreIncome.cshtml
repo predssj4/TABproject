@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Store.DataAccess.ViewModels.StoreIncomeViewModel>
+﻿@using System.Web.Mvc.Html
+@using Store.DataAccess
+@using Store.DataAccess.FilterViewModels
+@model IEnumerable<Store.DataAccess.ViewModels.StoreIncomeViewModel>
 
 @{
     ViewBag.Title = "GetStoreIncome";
@@ -6,6 +9,21 @@
 
 <h2>Store Income</h2>
 
+<form action="GetStoreIncome" method="get">
+    <div class="col-xs-3">
+        <select name="filter" class="form-control">
+            <option value="IdAsc">Id ascending</option>
+            <option value="IdDesc">Id descending</option>
+            <option value="IncomeAsc">Income Ascending</option>
+            <option value="IncomeDesc">Income Descending</option>
+        </select>
+    </div>
+   
+    <button type="submit" class="btn btn-danger">Send</button>
+</form>
+
+
+@*@Html.Partial("_Filtring", new StoreFilterVM())*@
 
 <table class="table">
     <tr>

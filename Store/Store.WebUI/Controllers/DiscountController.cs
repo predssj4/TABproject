@@ -38,9 +38,34 @@ namespace Store.WebUI.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetDiscounts()
+        public ActionResult GetDiscounts(string filter = "IdAsc")
         {
-            return View(_discountrepo.GetDiscounts());
+            var result = _discountrepo.GetDiscounts();
+
+            switch (filter)
+            {
+                case "IdAsc":
+                    result = result.OrderBy(x => x.DiscountId).ToList();
+                    break;
+                case "IdDesc":
+                    result = result.OrderByDescending(x => x.DiscountId).ToList();
+                    break;
+                case "NameAsc":
+                    result = result.OrderBy(x => x.Name).ToList();
+                    break;
+                case "NameDesc":
+                    result = result.OrderByDescending(x => x.Name).ToList();
+                    break;
+                case "ValueAsc":
+                    result = result.OrderBy(x => x.Value).ToList();
+                    break;
+                case "ValueDesc":
+                    result = result.OrderByDescending(x => x.Value).ToList();
+                    break;
+
+            }
+
+            return View(result);
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
 using Store.DataAccess;
+using Store.DataAccess.FilterViewModels;
 using Store.DataAccess.Repositories;
 using Store.DataAccess.ViewModels;
 
@@ -26,9 +27,31 @@ namespace Store.WebUI.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetStoreIncome()
+        public ActionResult GetStoreIncome(string filter = "IdAsc")
         {
+
+
+
             var result = _storeRepo.GetStoresIncome();
+
+            switch (filter)
+            {
+                case "IdAsc":
+                    result = result.OrderBy(x => x.StoreId).ToList();
+                    break;
+                case "IdDesc":
+                    result = result.OrderByDescending(x => x.StoreId).ToList();
+                    break;
+                case "IncomeAsc":
+                    result = result.OrderBy(x => x.Income).ToList();
+                    break;
+                case "IncomeDesc":
+                    result = result.OrderByDescending(x => x.Income).ToList();
+                    break;
+
+            }
+
+
             return View((object)result);
         }
 

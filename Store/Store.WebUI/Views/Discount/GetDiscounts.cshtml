@@ -6,6 +6,23 @@
 
 <h2>Discounts</h2>
 
+<form action="GetDiscounts" method="get">
+    <div class="col-xs-3">
+        <select name="filter" class="form-control">
+            <option value="IdAsc">Id ascending</option>
+            <option value="IdDesc">Id descending</option>
+            <option value="NameAsc">Name Ascending</option>
+            <option value="NameDesc">Name Descending</option>
+            <option value="ValueAsc">Value Ascending</option>
+            <option value="ValueDesc">Value Descending</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-danger">Send</button>
+</form>
+
+
+
 <p>
     @Html.ActionLink("Create New", "AddDiscount")
 </p>
