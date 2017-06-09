@@ -9,16 +9,3 @@
 @Html.ActionLink("Stores", "GetStoreIncome",null , htmlAttributes: new  { @class="btn btn-info"} )
 @Html.ActionLink("Add Store", "AddStore", null , htmlAttributes: new { @class = "btn btn-info" })
 
-
-@using (Html.BeginForm("GetStoreIncome", "Store", FormMethod.Get, new { @class = "" }))
-{
-    <div class="col-lg-12">
-
-
-        @*@Html.DropDownListFor(x => x.Filter, EnumHelper.GetSelectList(typeof(Filters.StoreFilter)))*@
-        
-        @Html.EnumDropDownListFor(x => x.Filter);
-
-        <button type="submit">wyslij</button>
-    </div>
-}

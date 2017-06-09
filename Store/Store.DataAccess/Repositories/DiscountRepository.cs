@@ -37,12 +37,12 @@ namespace Store.DataAccess.Repositories
                         catch (Exception ex)
                         {
                             trans.Rollback();
-                            return "NIe udało się dodać produktu" + ex.Message.ToString();
+                            return "Discount can not be removed" + ex.Message.ToString();
                         }
                     }
                 }
             }
-            return "Zniżka dodana pomyślnie";
+            return "Discount added succesfully";
         }
 
         public IEnumerable<DiscountViewModel> GetDiscounts()

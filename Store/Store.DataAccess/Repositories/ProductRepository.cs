@@ -35,13 +35,13 @@ namespace Store.DataAccess
                     }
                     catch(Exception ex)
                     {
-                        return "Nie udało się dodać produktu: "+ex.Message.ToString();
+                        return "Product can not be added:\n "+ex.Message.ToString();
                     }
 
                 }
             }
 
-            return "Produkt Dodany";
+            return "Product added succesfully";
         }
 
         public string EditProduct(ProductViewModel product)
@@ -68,12 +68,12 @@ namespace Store.DataAccess
                     }
                     catch (Exception ex)
                     {
-                        return "Nie udało się edytować produktu: " + ex.Message.ToString();
+                        return "Product can not be modified: \n" + ex.Message.ToString();
                     }
                 }
             }
 
-            return "Produkt edytowany pomyślnie";
+            return "Product modified succesfully";
         }
 
         public ProductDetailsViewModel GetDetails(int id)
@@ -137,13 +137,13 @@ namespace Store.DataAccess
                         catch (Exception ex)
                         {
                             trans.Rollback();
-                            return "Nie udało się usunąć produktu" + ex.Message.ToString();
+                            return "Product can not be removed\n" + ex.Message.ToString();
                         }
                     }
                 }
             }
 
-            return "Produkt usunięty pomyślnie";
+            return "Product removed successfully";
         }
 
         public IEnumerable<ProductViewModel> GetProductsList()

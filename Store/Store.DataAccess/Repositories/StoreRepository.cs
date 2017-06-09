@@ -138,13 +138,13 @@ namespace Store.DataAccess.Repositories
                         catch (Exception ex)
                         {
                             trans.Rollback();
-                            return "Nie udało się dodać sklepu: " + ex.Message.ToString();
+                            return "A new store can not be added:\n " + ex.Message.ToString();
                         }
                     }
                 }
             }
 
-            return "Sklep został pomyślnie dodany do sieci";
+            return "The new store added successfully";
         }
 
         public IEnumerable<StoreHouseViewModel> GetAllStoreHouses()
@@ -206,13 +206,13 @@ namespace Store.DataAccess.Repositories
                         catch (Exception ex)
                         {
                             trans.Rollback();
-                            return "Nie udało się połączyć magazynu" + ex.Message.ToString();
+                            return "The Storehouse couldn't be bound \n" + ex.Message.ToString();
                         }
                     }
                 }
             }
 
-            return "Magazyn pomyślnie powiązany ze sklepem";
+            return "The Storehouse bound successfully";
         }
     }
 
